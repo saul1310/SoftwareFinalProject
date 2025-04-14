@@ -33,5 +33,9 @@ def test_fc_init_typecasting_front_back_texts_to_str():
 
 def test_d_init_get_set(my_d = my_d()):
     assert len(my_d.get_flashcards()) == 2
-    assert my_d.get_children() == None
+    assert len(my_d.get_children()) == 0
     new_d = d()
+    my_d.add_child(new_d)
+    my_d.add_flashcard(fc())
+    assert len(my_d.get_flashcards()) == 3
+    assert len(my_d.get_children()) == 1
