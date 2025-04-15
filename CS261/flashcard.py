@@ -28,6 +28,9 @@ class Flashcard:
             raise ValueError("Input must be castable to a String.")
         if isinstance(facing_front, bool): self._facing_front = facing_front
         else: raise ValueError("Input must be a Boolean.")
+        self._current_streak = 0
+        self._correct_guesses = 0
+        self._incorrect_guesses = 0
     
     def get_front_text(self):
         """
@@ -78,3 +81,20 @@ class Flashcard:
     
     def switch_side(self):
         self._facing_front = False if self.is_facing_front() else True
+    
+    def score(self, correct_guess: bool):
+        try:
+            if correct_guess:
+                self._current_streak += 1
+                self._correct_guesses += 1
+            else:
+                self._current_streak = 0
+                self._incorrect_guesses += 1
+        except:
+            raise ValueError('Input must be a Bool.')
+    
+    def _reset_stats(self):
+        self._current_streak = 0
+        self._correct_guesses = 0
+        self._incorrect_guesses = 0
+
